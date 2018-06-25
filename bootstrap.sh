@@ -13,15 +13,12 @@ pip install -e .
 
 # Install tests modules
 pip install pytest-datadir pytest-console-scripts
-# add symolic link to test data (until the directory is renamed)
-# cd tests
-# ln -s misc_data data
 
 # Extras
 pip install seaborn Cython
 
 # Cartography and so on
-pip install cartopy shapely descartes fiona geopandas
+pip install cartopy shapely descartes fiona geopandas networkx
 
 # Install jupyter
 cd $HOME
