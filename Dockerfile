@@ -16,6 +16,7 @@ RUN wget -O Miniconda3-latest-Linux-x86_64.sh https://repo.anaconda.com/minicond
 RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p $CONDA_DIR
 
 ENV PATH $CONDA_DIR/bin:$PATH
-RUN conda create -n mgkit -c bioconda -c conda-forge -c default mgkit
+ARG MGKIT_VERSION=0.5.8
+RUN conda create -n mgkit -c frubino -c bioconda -c conda-forge -c default mgkit==${MGKIT_VERSION}
 RUN conda clean -a -y
 ENV PATH /home/mgkit/miniconda/envs/mgkit/bin/:$PATH
