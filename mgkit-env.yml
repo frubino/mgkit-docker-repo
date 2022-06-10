@@ -1,0 +1,13 @@
+name: mgkit
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - pip
+  - python=3.7
+  - samtools
+  - bcftools
+  - pytables
+  - pyvcf
+
