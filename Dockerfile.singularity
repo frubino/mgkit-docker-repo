@@ -5,19 +5,21 @@ FROM continuumio/miniconda3:latest
 COPY mgkit-env.yml /root/
 
 # Create the environment from the file
-RUN conda env create --name mgkit -f /root/mgkit-env.yml
+RUN conda env create --name mgkit -f /root/mgkit-env.yml; \
+    conda clean -a -y
 
 CMD [ "/bin/bash" ]
 
 # Add environment to the path
 ENV PATH /opt/conda/envs/mgkit/bin:$PATH
-
-# Install compiler for python packages (mgkit really)
-# needs to update the cache and get the install the build essentials
-RUN apt update
-RUN apt install -y build-essential
-
 # Set the conda environment for pip Install python packages
 ENV CONDA_PREFIX /opt/conda/envs/mgkit
 
-RUN pip install --prefix=$CONDA_PREFIX git+https://github.com/frubino/mgkit.git@0.6.0
+# Install compiler for python packages (mgkit really)
+# needs to update the cache and get the install the build essentials
+RUN apt update; \
+    apt install -y build-essential; \
+    pip install --prefix=$CONDA_PREFIX git+https://github.com/frubino/mgkit.git@0.6.0; \
+    apt remove build-essential -y; \
+    apt autoremove -y 
+
